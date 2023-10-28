@@ -1,7 +1,7 @@
 import Header from '../../components/Header'
 import NavBar from '../../components/NavBar'
 import { Outlet } from 'react-router-dom'
-import '../../styles/components/app.sass'
+import '../../styles/components/initial.sass'
 
 function Initial() {
     return (
@@ -9,7 +9,9 @@ function Initial() {
             <Header />
             <div className='main'>
                 <NavBar />
-                <Outlet />
+                <div className='main-content'>
+                    <Outlet />
+                </div>
             </div>
         </div>
     )

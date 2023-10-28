@@ -1,0 +1,86 @@
+@use '../variables'
+
+.newBooking
+    background-color: variables.$ascent-bg-second
+    width: 100%
+    height: calc( 100vh - 136.34px)
+    padding: 40px
+    color: variables.$text-color-second
+    font-family: Verdana
+    overflow-y: scroll
+    border-radius: 10px
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5)
+
+    &::-webkit-scrollbar
+        background: none
+        width: 12px
+    &::-webkit-scrollbar-thumb
+        background: variables.$text-color-room
+        height: 20px
+        border-radius: 6px
+
+.dataBooking, .dataResponsible, .address
+    margin-bottom: 30px
+.row
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    .input
+        width: 220px
+        display: flex
+        flex-direction: column
+        margin-right: 20px
+        label
+            font-size: 14px
+            margin: 8px 0
+            font-weight: bold
+
+        input, select
+            margin-bottom: 10px
+            border: 1px solid variables.$color-border-input
+            padding: 8px 8px
+            border-radius: 3px
+            color: variables.$text-color-room
+            font-size: 12px
+            &::placeholder
+                color: variables.$text-color-room
+            &:focus
+                outline: 2px solid variables.$text-color-second
+
+.btnSubmit
+    .row
+        max-width: 940px
+        flex-direction: row-reverse
+        input
+            cursor: pointer
+            align-self: end
+            width: 140px
+            padding: 10px 0
+            background-color: variables.$primary-blue
+            color: variables.$ascent-bg-second
+            border-radius: 8px
+            transition: .5s
+            border: 0
+            &:hover
+                background-color: variables.$ascent-bg-cian
+                color: variables.$ascent-bg-second
+
+@media (max-width: 1024px)
+    .btnSubmit
+        .row
+            max-width: 700px
+            flex-direction: row-reverse
+
+@media (max-width: 768px)
+    .btnSubmit
+        .row
+            max-width: 460px
+            flex-direction: row-reverse
+
+@media (max-width: 620px)
+    .btnSubmit
+        .row
+            max-width: 220px
+            flex-direction: row-reverse
+            input
+                width: 220px

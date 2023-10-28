@@ -1,7 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import  Dashboard  from '../pages/Dashboard/Dashboard'
 import NewBooking  from '../pages/NewBooking/NewBooking'
-
 import Initial from '../pages/Initial/Initial'
 
 export const RoutesMain = () => {
