@@ -1,25 +1,64 @@
 import React, { useState, useEffect } from 'react'
-import '../../styles/components/newbooking.sass'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import schema from '../../validations/newBooking'
+import location from '../../services/axios'
+import '../../styles/components/newbooking.sass'
 
 function NewBooking() {
 
   const [count, setCount] = useState(0)
   const [formData, setFormData] = useState([])
   const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) })
-  
-  useEffect(()=>{
+  const [inputCep, setInputCep] = useState('');
+
+  useEffect(() => {
     const localItem = JSON.parse(localStorage.getItem("bookingData"));
-    if(localItem.length != 0){
-      setFormData(localItem);
+    if (localItem != null) {
+      if (localItem.length != 0) {
+        setFormData(localItem);
+      }
     }
+
   }, [])
-  
+
   useEffect(() => {
     localStorage.setItem('bookingData', JSON.stringify(formData));
   }, [formData])
+
+  useEffect(() => {
+    getCep(inputCep)
+    // console.log(inputCep);
+  }, [inputCep])
+
+  const getCepInput = (e) => {
+    setInputCep(e.target.value);
+  };
+
+  async function getCep(textCep) {
+    const cep = textCep; // Substitua pelo CEP que você deseja consultar
+    try {
+      const dadosCEP = await location(cep);
+      console.log('Dados do CEP:', dadosCEP);
+      let city = document.querySelector('input[name=city]');
+      city.value = dadosCEP.localidade;
+      let state = document.querySelector('select[name=state]');
+      state.value = dadosCEP.uf
+      let neighborhood = document.querySelector('input[name=neighborhood]');
+      neighborhood.value = dadosCEP.bairro
+      let road = document.querySelector('input[name=road]');
+      road.value = dadosCEP.logradouro
+      let complement = document.querySelector('input[name=complement]');
+      complement.value = dadosCEP.complemento
+
+
+      // Faça algo com os dados do CEP aqui
+    } catch (error) {
+      // Trate o erro aqui
+      //console.error('Erro ao consultar CEP:', error);
+    }
+  }
+
 
   function onData(params) {
     setFormData([...formData, { ...params, id: "#79845" + count }])
@@ -37,23 +76,25 @@ function NewBooking() {
               <select {...register('accommodation')} name="accommodation" id="accommodation">
                 <option value="">Selecione uma acomodação</option>
                 <option value="duplo luxo">Duplo Luxo</option>
+                <option value="standard casal">Standard Casal</option>
+                <option value="Casal Premium">Casal Premium</option>
               </select>
               <span>{errors.accommodation?.message}</span>
             </div>
             <div className="input">
               <label htmlFor="check-in">Check-in</label>
-              <input type="text" name='check-in' placeholder='DD/MM/AAAA' />
-
+              <input {...register('checkIn')} type="text" name='checkIn' placeholder='DD/MM/AAAA' />
+              <span>{errors.checkIn?.message}</span>
             </div>
             <div className="input">
-              <label htmlFor="check-out">Check-out</label>
-              <input type="text" name='check-out' placeholder='DD/MM/AAAA' />
-
+              <label htmlFor="checkOut">Check-out</label>
+              <input {...register('checkOut')} type="text" name='checkOut' placeholder='DD/MM/AAAA' />
+              <span>{errors.checkOut?.message}</span>
             </div>
             <div className="input">
               <label htmlFor="guests">Hóspedes</label>
-              <input type="text" name='guests' placeholder='01 Adultos - 02 Crianças' />
-
+              <input {...register('guests')} type="text" name='guests' placeholder='01 Adultos - 02 Crianças' />
+              <span>{errors.guests?.message}</span>
             </div>
           </div>
         </div>
@@ -63,37 +104,45 @@ function NewBooking() {
           <div className="row">
             <div className="input">
               <label htmlFor="name">Nome</label>
-              <input type="text" name='name' placeholder='Nome' />
+              <input {...register('name')} type="text" name='name' placeholder='Nome' />
+              <span>{errors.name?.message}</span>
             </div>
             <div className="input">
               <label htmlFor="surname">Sobrenome</label>
-              <input type="text" name='surname' placeholder='Sobrenome' />
+              <input {...register('surname')} type="text" name='surname' placeholder='Sobrenome' />
+              <span>{errors.surname?.message}</span>
             </div>
             <div className="input">
               <label htmlFor="document">Documento</label>
-              <input type="text" name='document' placeholder='CPF/Passaporte' />
+              <input {...register('document')} type="text" name='document' placeholder='CPF/Passaporte' />
+              <span>{errors.document?.message}</span>
             </div>
             <div className="input">
               <label htmlFor="date">Data de Nascimento</label>
-              <input type="text" name='date' placeholder='DD/MM/AAAA' />
+              <input {...register('date')} type="text" name='date' placeholder='DD/MM/AAAA' />
+              <span>{errors.date?.message}</span>
             </div>
           </div>
           <div className="row">
             <div className="input">
               <label htmlFor="phone">Telefone</label>
-              <input type="text" name='phone' placeholder='(00) 0 0000-0000' />
+              <input {...register('phone')} type="text" name='phone' placeholder='(00) 0 0000-0000' />
+              <span>{errors.phone?.message}</span>
             </div>
             <div className="input">
               <label htmlFor="email">E-mail</label>
-              <input type="text" name='email' placeholder='Email' />
+              <input {...register('email')} type="text" name='email' placeholder='Email' />
+              <span>{errors.email?.message}</span>
             </div>
             <div className="input">
               <label htmlFor="sex">Sexo</label>
-              <input type="text" name='sex' placeholder='Sexo' />
+              <input {...register('sex')} type="text" name='sex' placeholder='Sexo' />
+              <span>{errors.sex?.message}</span>
             </div>
             <div className="input">
               <label htmlFor="nationality">Nacionalidade</label>
-              <input type="text" name='nationality' placeholder='Nacionalidade' />
+              <input {...register('nationality')} type="text" name='nationality' placeholder='Nacionalidade' />
+              <span>{errors.nationality?.message}</span>
             </div>
           </div>
         </div>
@@ -102,11 +151,13 @@ function NewBooking() {
           <div className="row">
             <div className="input">
               <label htmlFor="cep">CEP</label>
-              <input type="text" name='cep' placeholder='00000-000' />
+              <input {...register('cep')} onChange={getCepInput} type="text" name='cep' placeholder='00000-000' />
+              <span>{errors.cep?.message}</span>
             </div>
             <div className="input">
               <label htmlFor="road">Rua</label>
-              <input type="text" name='road' placeholder='Rua' />
+              <input {...register('road')} type="text" name='road' placeholder='Rua' />
+              <span>{errors.road?.message}</span>
             </div>
             <div className="input">
               <label htmlFor="neighborhood">Bairro</label>
@@ -114,7 +165,8 @@ function NewBooking() {
             </div>
             <div className="input">
               <label htmlFor="number">Número</label>
-              <input type="text" name='number' placeholder='Nº' />
+              <input {...register('number')} type="text" name='number' placeholder='Nº' />
+              <span>{errors.number?.message}</span>
             </div>
           </div>
           <div className="row">

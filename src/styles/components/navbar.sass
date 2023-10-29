@@ -4,32 +4,33 @@
     width: 257px
     background-color: variables.$ascent-bg-second
     height: calc( 100vh - 66.34px)
-    transition: .5s ease
+    transition: width 0.5s ease
 
 .active
     width: 0px
+
 .none-menu
     display: none
 
 .close
-
     background: linear-gradient(90deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0) 100%)
     cursor: pointer
     img
         padding-top: 48vh
 
 .select
+
     background-color: variables.$primary-white
     border-left: 7px solid variables.$primary-blue
 
 .nav-menu
     list-style-type: none
-    transition: 5s ease
     width: 257px
     li
         margin: 30px 0
         height: 100%
         margin-right: 10px
+        transform-origin: left
         a
             display: flex
             align-items: center

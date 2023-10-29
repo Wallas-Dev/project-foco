@@ -1,0 +1,74 @@
+@use '../variables'
+
+.dashboard
+    background-color: variables.$ascent-bg-second
+    width: 100%
+    height: calc( 100vh - 136.34px)
+    padding: 40px
+    color: variables.$text-color-primary
+    font-family: Verdana
+    overflow-y: scroll
+    border-radius: 10px
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5)
+
+    &::-webkit-scrollbar
+        background: none
+        width: 12px
+    &::-webkit-scrollbar-thumb
+        background: variables.$text-color-room
+        height: 20px
+        border-radius: 6px
+
+.topSide
+    display: flex
+    margin-bottom: 20px
+    width: 100%
+    .screen
+        width: 50%
+        border-radius: 7px
+        background-color: variables.$ascent-bg-second
+        display: flex
+        padding: 0px 100px
+        .allBooking
+            cursor: pointer
+            font-size: 14px
+            border-bottom: 4px solid variables.$primary-blue
+            h3
+                padding: 10px 20px
+                color: variables.$text-color-primary
+        .cart
+            font-size: 14px
+            h3
+                padding: 10px 20px
+                font-weight: normal
+                color: variables.$text-color-third
+    .search
+        margin: 0 12px
+        width: 40%
+        display: flex
+        input
+            width: 100%
+            border: 0
+            background-color: variables.$ascent-bg-second
+            font-size: 16px
+            padding: 12px 10px
+            border-top-left-radius: 7px
+            border-bottom-left-radius: 7px
+        button
+            background-color: variables.$ascent-bg-second
+            border: 0
+            padding: 5px
+            border-top-right-radius: 7px
+            border-bottom-right-radius: 7px
+            cursor: pointer
+    .newReserve
+        width: 20%
+        background-color: variables.$primary-blue
+        display: flex
+        align-items: center
+        justify-content: center
+        border-radius: 7px
+        a
+            margin-left: 5px
+            text-decoration: none
+            color: variables.$primary-white

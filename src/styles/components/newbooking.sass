@@ -5,7 +5,7 @@
     width: 100%
     height: calc( 100vh - 136.34px)
     padding: 40px
-    color: variables.$text-color-second
+    color: variables.$text-color-primary
     font-family: Verdana
     overflow-y: scroll
     border-radius: 10px
@@ -33,19 +33,26 @@
         label
             font-size: 14px
             margin: 8px 0
-            font-weight: bold
+            font-weight: 600
 
         input, select
             margin-bottom: 10px
             border: 1px solid variables.$color-border-input
             padding: 8px 8px
             border-radius: 3px
-            color: variables.$text-color-room
+            color: variables.$text-color-primary
             font-size: 12px
             &::placeholder
                 color: variables.$text-color-room
             &:focus
                 outline: 2px solid variables.$text-color-second
+        select
+            color: variables.$text-color-room
+            &:focus
+                color: variables.$text-color-primary
+        span
+            font-size: 12px
+            color: variables.$color-warning
 
 .btnSubmit
     .row
@@ -84,3 +91,7 @@
             flex-direction: row-reverse
             input
                 width: 220px
+
+// @media (max-width: 425px)
+//     .newBooking
+//         height: auto
