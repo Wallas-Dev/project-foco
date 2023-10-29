@@ -3,7 +3,7 @@ import * as yup from 'yup';
 const schema  = yup.object({
     accommodation: yup.string().required('Preencha este campo.'),
     checkIn: yup.string().required('Preencha este campo.'),
-    checkOut: yup.string().required('Preencha este campo.o'),
+    checkOut: yup.string().required('Preencha este campo.'),
     guests: yup.string().required('Preencha este campo.'),
     name: yup.string().required('Preencha este campo.'),
     surname: yup.string().required('Preencha este campo.'),
@@ -15,7 +15,12 @@ const schema  = yup.object({
     nationality: yup.string().required('Preencha este campo.'),
     cep: yup.string().required('Preencha este campo.'),
     road: yup.string().required('Preencha este campo.'),
+    neighborhood: yup.string().required('Preencha este campo.'),
     number: yup.string().required('Preencha este campo.'),
+    city: yup.string().required('Preencha este campo.'),
+    state: yup.string().required('Preencha este campo.'),
+    complement: yup.string().required('Preencha este campo.'),
+    reference: yup.string().required('Preencha este campo.'),
 })
 
 export default schema;

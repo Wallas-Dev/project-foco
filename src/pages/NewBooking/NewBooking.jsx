@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import schema from '../../validations/newBooking'
@@ -11,12 +11,14 @@ function NewBooking() {
   const [formData, setFormData] = useState([])
   const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) })
   const [inputCep, setInputCep] = useState('');
+  const formRef = useRef(null)
 
   useEffect(() => {
     const localItem = JSON.parse(localStorage.getItem("bookingData"));
     if (localItem != null) {
       if (localItem.length != 0) {
         setFormData(localItem);
+        setCount(localItem.length)
       }
     }
 
@@ -28,7 +30,6 @@ function NewBooking() {
 
   useEffect(() => {
     getCep(inputCep)
-    // console.log(inputCep);
   }, [inputCep])
 
   const getCepInput = (e) => {
@@ -51,23 +52,20 @@ function NewBooking() {
       let complement = document.querySelector('input[name=complement]');
       complement.value = dadosCEP.complemento
 
-
-      // Faça algo com os dados do CEP aqui
     } catch (error) {
-      // Trate o erro aqui
-      //console.error('Erro ao consultar CEP:', error);
+
     }
   }
-
 
   function onData(params) {
     setFormData([...formData, { ...params, id: "#79845" + count }])
     setCount(count + 1)
+    formRef.current.reset();
   }
 
   return (
     <div className='newBooking'>
-      <form action="" onSubmit={handleSubmit(onData)}>
+      <form ref={formRef} action="" onSubmit={handleSubmit(onData)}>
         <div className='dataBooking'>
           <h2>Dados da reserva</h2>
           <div className='row'>
@@ -75,20 +73,20 @@ function NewBooking() {
               <label htmlFor="accommodation">Acomodação</label>
               <select {...register('accommodation')} name="accommodation" id="accommodation">
                 <option value="">Selecione uma acomodação</option>
-                <option value="duplo luxo">Duplo Luxo</option>
-                <option value="standard casal">Standard Casal</option>
+                <option value="Duplo Luxo">Duplo Luxo</option>
+                <option value="Standard Casal">Standard Casal</option>
                 <option value="Casal Premium">Casal Premium</option>
               </select>
               <span>{errors.accommodation?.message}</span>
             </div>
             <div className="input">
               <label htmlFor="check-in">Check-in</label>
-              <input {...register('checkIn')} type="text" name='checkIn' placeholder='DD/MM/AAAA' />
+              <input {...register('checkIn')} type="text" name='checkIn' placeholder='02/02/2022 19:30' />
               <span>{errors.checkIn?.message}</span>
             </div>
             <div className="input">
               <label htmlFor="checkOut">Check-out</label>
-              <input {...register('checkOut')} type="text" name='checkOut' placeholder='DD/MM/AAAA' />
+              <input {...register('checkOut')} type="text" name='checkOut' placeholder='05/02/2022 19:30' />
               <span>{errors.checkOut?.message}</span>
             </div>
             <div className="input">
@@ -104,12 +102,12 @@ function NewBooking() {
           <div className="row">
             <div className="input">
               <label htmlFor="name">Nome</label>
-              <input {...register('name')} type="text" name='name' placeholder='Nome' />
+              <input {...register('name')} type="text" name='name' placeholder='João' />
               <span>{errors.name?.message}</span>
             </div>
             <div className="input">
               <label htmlFor="surname">Sobrenome</label>
-              <input {...register('surname')} type="text" name='surname' placeholder='Sobrenome' />
+              <input {...register('surname')} type="text" name='surname' placeholder='Souza' />
               <span>{errors.surname?.message}</span>
             </div>
             <div className="input">
@@ -119,7 +117,7 @@ function NewBooking() {
             </div>
             <div className="input">
               <label htmlFor="date">Data de Nascimento</label>
-              <input {...register('date')} type="text" name='date' placeholder='DD/MM/AAAA' />
+              <input {...register('date')} type="text" name='date' placeholder='14/12/1994' />
               <span>{errors.date?.message}</span>
             </div>
           </div>
@@ -131,17 +129,17 @@ function NewBooking() {
             </div>
             <div className="input">
               <label htmlFor="email">E-mail</label>
-              <input {...register('email')} type="text" name='email' placeholder='Email' />
+              <input {...register('email')} type="text" name='email' placeholder='nome@email.com' />
               <span>{errors.email?.message}</span>
             </div>
             <div className="input">
               <label htmlFor="sex">Sexo</label>
-              <input {...register('sex')} type="text" name='sex' placeholder='Sexo' />
+              <input {...register('sex')} type="text" name='sex' placeholder='Masculino' />
               <span>{errors.sex?.message}</span>
             </div>
             <div className="input">
               <label htmlFor="nationality">Nacionalidade</label>
-              <input {...register('nationality')} type="text" name='nationality' placeholder='Nacionalidade' />
+              <input {...register('nationality')} type="text" name='nationality' placeholder='Brasileira' />
               <span>{errors.nationality?.message}</span>
             </div>
           </div>
@@ -151,43 +149,48 @@ function NewBooking() {
           <div className="row">
             <div className="input">
               <label htmlFor="cep">CEP</label>
-              <input {...register('cep')} onChange={getCepInput} type="text" name='cep' placeholder='00000-000' />
+              <input {...register('cep')} onChange={getCepInput} type="text" name='cep' placeholder='46400-000' />
               <span>{errors.cep?.message}</span>
             </div>
             <div className="input">
               <label htmlFor="road">Rua</label>
-              <input {...register('road')} type="text" name='road' placeholder='Rua' />
+              <input {...register('road')} type="text" name='road' placeholder='Av. Santana' />
               <span>{errors.road?.message}</span>
             </div>
             <div className="input">
               <label htmlFor="neighborhood">Bairro</label>
-              <input type="text" name='neighborhood' placeholder='Bairro' />
+              <input {...register('neighborhood')} onChange={getCepInput} type="text" name='neighborhood' placeholder='Centro' />
+              <span>{errors.neighborhood?.message}</span>
             </div>
             <div className="input">
               <label htmlFor="number">Número</label>
-              <input {...register('number')} type="text" name='number' placeholder='Nº' />
+              <input {...register('number')} type="text" name='number' placeholder='680' />
               <span>{errors.number?.message}</span>
             </div>
           </div>
           <div className="row">
             <div className="input">
               <label htmlFor="city">Cidade</label>
-              <input type="text" name='city' placeholder='Cidade' />
+              <input {...register('city')} onChange={getCepInput} type="text" name='city' placeholder='Caetite' />
+              <span>{errors.city?.message}</span>
             </div>
             <div className="input">
               <label htmlFor="state">Estado</label>
-              <select name="state" id="state">
+              <select {...register('state')} onChange={getCepInput} name="state" id="state">
                 <option value="">--</option>
                 <option value="BA">BA</option>
               </select>
+              <span>{errors.state?.message}</span>
             </div>
             <div className="input">
               <label htmlFor="complement">Complemento</label>
-              <input type="text" name='complement' placeholder='Casa.., Rua..' />
+              <input {...register('complement')} type="text" name='complement' placeholder='Casa' />
+              <span>{errors.complement?.message}</span>
             </div>
             <div className="input">
               <label htmlFor="reference">Referência</label>
-              <input type="text" name='reference' placeholder='Próximo a...' />
+              <input {...register('reference')} type="text" name='reference' placeholder='Próximo a clínica' />
+              <span>{errors.reference?.message}</span>
             </div>
           </div>
         </div>

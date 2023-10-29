@@ -41,10 +41,33 @@
             text-decoration: none
             border-top-right-radius: 10px
             border-bottom-right-radius: 10px
-
+            transition: .3s
             img
                 margin-right: 10px
                 width: 20px
             &:hover
                 background-color: variables.$primary-white
                 border-left: 7px solid variables.$primary-blue
+                span
+                    transition: .3s
+                    color: variables.$primary-blue
+
+@media (min-width:  1024px)
+    .nav-menu
+        font-size: 20px
+
+@media (max-width: 425px)
+    .header
+        padding: 0 10px
+    .logo
+        img
+            width: 100px
+            margin-right: 0
+        .gap
+            display: none
+    .info-profile
+        margin-l: 0px
+        .info
+            display: none
+        .gap
+            display: none

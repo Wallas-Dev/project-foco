@@ -1,16 +1,29 @@
 @use '../variables'
 
+.headerContent
+    display: flex
+    padding: 18px 0
+    width: 100%
+    .headerAccommodation
+        width: 20%
+        padding-left: 8px
+    .headerGuests
+        wi
+    .headerCheckin
+        margin-right: 17%
+    .headerCheckout
+        margin-right: 12%
+
 .dashboard
     background-color: variables.$ascent-bg-second
     width: 100%
-    height: calc( 100vh - 136.34px)
-    padding: 40px
+    height: calc(100vh - 236.34px)
+    padding-left: 15px
     color: variables.$text-color-primary
     font-family: Verdana
     overflow-y: scroll
     border-radius: 10px
     box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5)
-
     &::-webkit-scrollbar
         background: none
         width: 12px
@@ -23,11 +36,11 @@
     display: flex
     margin-bottom: 20px
     width: 100%
-    .screen
+    .leftSide
+        display: flex
         width: 50%
         border-radius: 7px
         background-color: variables.$ascent-bg-second
-        display: flex
         padding: 0px 100px
         .allBooking
             cursor: pointer
@@ -42,33 +55,289 @@
                 padding: 10px 20px
                 font-weight: normal
                 color: variables.$text-color-third
-    .search
-        margin: 0 12px
-        width: 40%
+
+    .rightSide
         display: flex
-        input
-            width: 100%
-            border: 0
-            background-color: variables.$ascent-bg-second
-            font-size: 16px
-            padding: 12px 10px
-            border-top-left-radius: 7px
-            border-bottom-left-radius: 7px
-        button
-            background-color: variables.$ascent-bg-second
-            border: 0
-            padding: 5px
-            border-top-right-radius: 7px
-            border-bottom-right-radius: 7px
-            cursor: pointer
-    .newReserve
-        width: 20%
-        background-color: variables.$primary-blue
+        width: 50%
+        .search
+            margin: 0 12px
+            width: 80%
+            display: flex
+            input
+                width: 100%
+                border: 0
+                background-color: variables.$ascent-bg-second
+                font-size: 16px
+                padding: 12px 10px
+                border-top-left-radius: 7px
+                border-bottom-left-radius: 7px
+            button
+                background-color: variables.$ascent-bg-second
+                border: 0
+                padding: 5px
+                border-top-right-radius: 7px
+                border-bottom-right-radius: 7px
+                cursor: pointer
+        .newReserve
+            width: 50%
+            background-color: variables.$primary-blue
+            display: flex
+            align-items: center
+            justify-content: center
+            border-radius: 7px
+            a
+                margin-left: 5px
+                text-decoration: none
+                color: variables.$primary-white
+
+.contentBooking
+    position: relative
+    display: flex
+    justify-content: space-between
+    border-top: 1px solid variables.$text-color-room
+    border-bottom: 1px solid variables.$text-color-room
+    padding: 15px 10px
+    .accommodation
         display: flex
         align-items: center
+        flex-direction: column
+        .headerAccommodation
+            width: 100%
+            display: flex
+            justify-content: left
+            padding: 10px 0
+            h4
+                color: variables.$text-color-third
+                font-weight: normal
+
+        .contentAccomodation
+            display: flex
+            align-items: center
+            .imgRoom
+                width: 170px
+                height: 100px
+                img
+                    width: 100%
+                    height: 100%
+                    border-radius: 5px
+            .infoAccommodation
+                margin-left: 15px
+                .id
+                    color: variables.$primary-blue
+                    margin-bottom: 5px
+                .room
+                    color: variables.$text-color-primary
+
+    .guests
+        display: flex
+        flex-direction: column
+        .headerGuests
+            margin-bottom: 30px
+            width: 100%
+            display: flex
+            justify-content: left
+            padding: 10px 0
+            h4
+                color: variables.$text-color-third
+                font-weight: normal
+        .contentGuest
+            display: flex
+            flex-direction: column
+            justify-content: center
+            .name
+                color: variables.$text-color-primary
+                margin-bottom: 5px
+            .guest
+                color: variables.$text-color-third
+
+    .checkIn
+        display: flex
+        flex-direction: column
+        .headerCheckin
+            margin-bottom: 30px
+            width: 100%
+            display: flex
+            justify-content: left
+            padding: 10px 0
+            h4
+                color: variables.$text-color-third
+                font-weight: normal
+        .contentCheckin
+            .date
+                margin-bottom: 5px
+            .hour
+                text-align: center
+                color: variables.$text-color-third
+
+    .checkOut
+        display: flex
+        flex-direction: column
+        .headerCheckout
+            margin-bottom: 30px
+            width: 100%
+            display: flex
+            justify-content: left
+            padding: 10px 0
+            h4
+                color: variables.$text-color-third
+                font-weight: normal
+        .contentCheckout
+            .date
+                margin-bottom: 5px
+            .hour
+                text-align: center
+                color: variables.$text-color-third
+
+    .acoes
+        display: flex
+        align-items: center
+        cursor: pointer
+    
+
+    .option
+        display: none
+        transition: 1s
+        position: absolute
+        background-color: #FFFFFF
+        right: 30px
+        bottom: 25px
+        box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5)
+        border-radius: 5px
+        flex-direction: column
+        text-align: center
         justify-content: center
-        border-radius: 7px
-        a
-            margin-left: 5px
-            text-decoration: none
-            color: variables.$primary-white
+        font-size: 19px
+        width: 140px
+        height: 60px
+        .edit
+            width: 100%
+            height: 50%
+            font-weight: normal
+            border-bottom: 1px solid rgba(0, 0, 0, 0.2)
+            display: flex
+            align-items: center
+            justify-content: center
+            padding: 14px 0
+            cursor: pointer
+            h5
+                font-weight: normal
+        .delete
+            width: 100%
+            height: 50%
+            display: flex
+            align-items: center
+            justify-content: center
+            font-weight: normal
+            padding: 14px 0
+            cursor: pointer
+            h5
+                font-weight: normal
+                color: variables.$color-warning
+    .active
+        display: flex
+
+@media (max-width: 1024px)
+    .topSide
+        flex-direction: column
+        .leftSide
+            justify-content: center
+            width: 100%
+            margin-bottom: 10px
+            padding: 0px 10px
+
+        .rightSide
+            width: 100%
+            .search
+                width: 60%
+                margin-left: 0
+            .newReserve
+                width: 40%
+                a
+                    font-size: 15px
+                img
+                    width: 20px
+
+@media (max-width: 768px)
+    .contentBooking
+        display: flex
+        flex-direction: column
+
+        .accommodation
+            display: flex
+            align-items: center
+            justify-content: center
+            .headerAccommodation
+                justify-content: center
+            .imgRoom
+                width: 170px
+                height: 100px
+                img
+                    width: 100%
+                    height: 100%
+                    border-radius: 5px
+            .infoAccommodation
+                margin-left: 15px
+                .id
+                    color: variables.$primary-blue
+                    margin-bottom: 5px
+                .room
+                    color: variables.$text-color-primary
+
+        .guests
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: center
+            margin-top: 10px
+            .headerGuests
+                justify-content: center
+                margin-bottom: 0
+            .name
+                color: variables.$text-color-primary
+                margin-bottom: 5px
+            .guest
+                color: variables.$text-color-third
+
+        .checkIn
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: center
+            margin-top: 10px
+            .headerCheckin
+                justify-content: center
+                margin-bottom: 0
+            .date
+                margin-bottom: 5px
+            .hour
+                text-align: center
+
+        .checkOut
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: center
+            margin-top: 10px
+            .headerCheckout
+                justify-content: center
+                margin-bottom: 0
+            .date
+                margin-bottom: 5px
+            .hour
+                text-align: center
+
+        .acoes
+            display: flex
+            align-items: center
+            justify-content: center
+            margin-top: 10px
+
+        .option
+            right: 180px
+            bottom: 16px
+
+@media (max-width: 425px)
+    .contentBooking
+        .option
+            right: 26px
+            bottom: 17px
