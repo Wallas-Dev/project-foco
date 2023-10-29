@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import schema from '../../validations/newBooking'
 import location from '../../services/axios'
 import { useParams } from 'react-router-dom';
-import '../../styles/components/editbooking.sass'
+import '../../styles/components/editBooking.sass'
 
 function Edit() {
     const navigate = useNavigate();
