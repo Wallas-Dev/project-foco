@@ -1,4 +1,4 @@
-
+import { Link } from 'react-router-dom'
 import dashboard from '../assets/icons/command.svg'
 import plus from '../assets/icons/plus.svg'
 import settings from '../assets/icons/settings.svg'
@@ -42,21 +42,21 @@ const NavBar = () => {
             <nav className='nav'>
                 <ul className='nav-menu'>
                     <li>
-                        <a onClick={() => selectNav('dashboard')} href="/dashboard">
+                        <Link onClick={() => selectNav('dashboard')} to="/dashboard">
                             <img src={dashboard} alt="Tela inicial" />
                             <span>Dashboard</span>
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a onClick={() => selectNav('newBooking')} href="/newBooking">
+                        <Link onClick={() => selectNav('newBooking')} to="/newBooking">
                             <img src={plus} alt="Nova reserva" />
                             <span>Nova reserva</span>
-                        </a>
+                        </Link>
                     </li>
-                    <li><a href="/">
+                    <li><Link to="/">
                         <img src={settings} alt="Configurações" />
                         <span>Configurações</span>
-                    </a></li>
+                    </Link></li>
                 </ul>
             </nav>
             <div className='close'>

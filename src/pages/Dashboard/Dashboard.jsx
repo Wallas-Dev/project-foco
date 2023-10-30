@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-
+import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 import '../../styles/components/dashboard.sass'
 import search from '../../assets/icons/search.svg'
@@ -86,7 +86,7 @@ function Dashboard() {
           </div>
           <div className='newReserve'>
             <img src={plus} alt="" />
-            <a onClick={() => selectNav('newReserve')} href="/newBooking">Nova reserva</a>
+            <Link to="/newBooking">Nova reserva</Link>
           </div>
         </div>
       </div>
