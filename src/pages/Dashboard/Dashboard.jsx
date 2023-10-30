@@ -7,6 +7,9 @@ import eye from '../../assets/icons/eye.svg'
 import plus from '../../assets/icons/plus.svg'
 import points from '../../assets/icons/points.svg'
 import duploLuxo from '../../assets/accommodations/Duplo-Luxo.jpg'
+import standardCasal from '../../assets/accommodations/Standard-Casal.jpg'
+import casalPremium from '../../assets/accommodations/Casal-Premium.jpg'
+
 
 function Dashboard() {
 
@@ -42,6 +45,7 @@ function Dashboard() {
       }
     });
   }
+
 
   const onEdit = (params) => {
     const id = params.target.id.substring(1)
@@ -101,7 +105,9 @@ function Dashboard() {
               </div>
               <div className="contentAccomodation">
                 <div className="imgRoom">
-                  <img src={duploLuxo} alt="" />
+                  <img src={item.accommodation === 'DuploLuxo' ? 
+                  duploLuxo : 
+                  item.accommodation === 'StandardCasal' ? standardCasal: casalPremium} alt="" />
                 </div>
                 <div className="infoAccommodation">
                   <h4 className='id'>{item.id}</h4>
