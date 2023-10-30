@@ -42,13 +42,21 @@ function Details() {
   return (
     <div className='details'>
       <div className='imgScreen'>
-        <img src={duploLuxo} alt="" />
+        <img src={bookingData.accommodation === 'DuploLuxo' ?
+          duploLuxo :
+          bookingData.accommodation === 'StandardCasal' ?
+            standardCasal :
+            casalPremium} alt="" />
       </div>
       <div className='informations'>
         <div className="booking">
           <div className='title'>Dados da reserva</div>
           <label htmlFor="">Acomodação</label>
-          <h3>{bookingData.accommodation}</h3>
+          <h3>{bookingData.accommodation === 'DuploLuxo' ?
+            "Duplo Luxo" :
+            bookingData.accommodation === 'StandardCasal' ?
+              "Standard Casal" :
+              "Casal Premium"}</h3>
           <label htmlFor="">Check-in</label>
           <h3>{bookingData.checkIn}</h3>
           <label htmlFor="">Check-out</label>

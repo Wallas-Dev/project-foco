@@ -105,13 +105,19 @@ function Dashboard() {
               </div>
               <div className="contentAccomodation">
                 <div className="imgRoom">
-                  <img src={item.accommodation === 'DuploLuxo' ? 
-                  duploLuxo : 
-                  item.accommodation === 'StandardCasal' ? standardCasal: casalPremium} alt="" />
+                  <img src={item.accommodation === 'DuploLuxo' ?
+                    duploLuxo :
+                    item.accommodation === 'StandardCasal' ?
+                      standardCasal :
+                      casalPremium} alt="" />
                 </div>
                 <div className="infoAccommodation">
                   <h4 className='id'>{item.id}</h4>
-                  <h4 className='room'>{item.accommodation}</h4>
+                  <h4>{item.accommodation === 'DuploLuxo' ?
+                    "Duplo Luxo" :
+                    item.accommodation === 'StandardCasal' ?
+                      "Standard Casal" :
+                      "Casal Premium"}</h4>
                 </div>
               </div>
             </div>
