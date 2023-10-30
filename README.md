@@ -6,7 +6,7 @@ O Sistema de Gerenciamento de reservas é uma aplicação desenvolvida para faci
 Link: https://project-foco.vercel.app/
 
 ## Para executar o programa o usuário irá precisar:
-Node: https://www.php.net/download](https://nodejs.org/en
+Node: https://nodejs.org/en
 Antes de iniciar deve-se rodar o comando "npm install" para instalar as dependências
 Para start o projeto é através do Vite com o comando: npm run dev
 
