@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 import '../../styles/components/dashboard.sass'
 import search from '../../assets/icons/search.svg'
+import eye from '../../assets/icons/eye.svg'
 import plus from '../../assets/icons/plus.svg'
+import points from '../../assets/icons/points.svg'
 import duploLuxo from '../../assets/accommodations/Duplo-Luxo.jpg'
 
 function Dashboard() {
@@ -45,6 +47,11 @@ function Dashboard() {
     const id = params.target.id.substring(1)
     console.log(id)
     navigate(`/edit/${id}`);
+  };
+
+  const onDetails = (params) => {
+    const id = params.target.id.substring(1)
+    navigate(`/details/${id}`);
   };
 
   function onDelete(e) {
@@ -136,7 +143,8 @@ function Dashboard() {
               </div>
             </div>
             <div className="acoes">
-              <h3 onClick={actionBooking}>...</h3>
+              <img src={points} onClick={actionBooking}></img>
+              <img id={item.id} src={eye} alt="" onClick={onDetails} />
             </div>
             <div id={item.id} className='option'>
               <div className="edit">

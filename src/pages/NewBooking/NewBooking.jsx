@@ -73,9 +73,9 @@ function NewBooking() {
               <label htmlFor="accommodation">Acomodação</label>
               <select {...register('accommodation')} name="accommodation" id="accommodation">
                 <option value="">Selecione uma acomodação</option>
-                <option value="Duplo Luxo">Duplo Luxo</option>
-                <option value="Standard Casal">Standard Casal</option>
-                <option value="Casal Premium">Casal Premium</option>
+                <option value="DuploLuxo">Duplo Luxo</option>
+                <option value="StandardCasal">Standard Casal</option>
+                <option value="CasalPremium">Casal Premium</option>
               </select>
               <span>{errors.accommodation?.message}</span>
             </div>
