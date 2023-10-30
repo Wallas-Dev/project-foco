@@ -88,7 +88,6 @@ function Dashboard() {
         {dataStorage.map((item, index) => (
 
           <div className="contentBooking">
-
             <div className="accommodation">
               <div className='headerAccommodation'>
                 <h4 >Acomodação</h4>
