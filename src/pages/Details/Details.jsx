@@ -83,7 +83,7 @@ function Details() {
           <h3>{bookingData.email}</h3>
           <label htmlFor="">Sexo</label>
           <h3>{bookingData.sex}</h3>
-          <label htmlFor="">Nacionalida</label>
+          <label htmlFor="">Nacionalidade</label>
           <h3>{bookingData.nationality}</h3>
         </div>
         <div className='city'>

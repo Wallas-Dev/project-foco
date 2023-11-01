@@ -9,8 +9,7 @@ const consultarCEP = async (cep) => {
     const response = await api.get(`${cep}/json/`);
     return response.data;
   } catch (error) {
-    //console.error('Erro ao consultar CEP:', error);
-    throw error; // Você pode lançar o erro para que seja tratado onde a função foi chamada.
+    throw error;
   }
 };
 

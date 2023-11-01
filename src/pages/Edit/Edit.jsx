@@ -53,13 +53,16 @@ function Edit() {
         },
     });
 
-    useEffect(() => {
-        // Marcar todos os campos como modificados
-        Object.keys(dirtyFields).forEach((fieldName) => {
-            setValue(fieldName, dirtyFields[fieldName], { shouldValidate: false });
-        });
-    }, [dirtyFields, setValue]);
 
+    const setInitialValues = (data) => {
+        setValue('road', data.road);
+        setValue('neighborhood', data.neighborhood);
+        setValue('city', data.city);
+        setValue('state', data.state);
+        setValue('complement', data.complement);
+
+    };
+    
     useEffect(() => {
         const localItem = JSON.parse(localStorage.getItem("bookingData"));
         if (localItem != null) {
@@ -88,21 +91,20 @@ function Edit() {
         const cep = textCep; // Substitua pelo CEP que você deseja consultar
         try {
             const dadosCEP = await location(cep);
-            let city = document.querySelector('input[name=city]');
-            city.value = dadosCEP.localidade;
-            let state = document.querySelector('select[name=state]');
-            state.value = dadosCEP.uf
-            let neighborhood = document.querySelector('input[name=neighborhood]');
-            neighborhood.value = dadosCEP.bairro
-            let road = document.querySelector('input[name=road]');
-            road.value = dadosCEP.logradouro
-            let complement = document.querySelector('input[name=complement]');
-            complement.value = dadosCEP.complemento
+            const obj = {
+                city: dadosCEP.localidade,
+                state: dadosCEP.uf,
+                neighborhood: dadosCEP.bairro,
+                road: dadosCEP.logradouro,
+                complement: dadosCEP.complemento
+            };
+            setInitialValues(obj);
 
         } catch (error) {
 
         }
     }
+
     function onData(params) {
         let ident = '#' + id
         let updatedData = dataEdit.map((item) => {
@@ -111,7 +113,6 @@ function Edit() {
             }
             return item;
         });
-        console.log(updatedData)
         setDataEdit(updatedData);
         localStorage.setItem('bookingData', JSON.stringify(updatedData));
         formRef.current.reset();
@@ -127,9 +128,9 @@ function Edit() {
                             <label htmlFor="accommodation">Acomodação</label>
                             <select {...register('accommodation')} name="accommodation" id="accommodation">
                                 <option value="">Selecione uma acomodação</option>
-                                <option value="Duplo Luxo">Duplo Luxo</option>
-                                <option value="Standard Casal">Standard Casal</option>
-                                <option value="Casal Premium">Casal Premium</option>
+                                <option value="DuploLuxo">Duplo Luxo</option>
+                                <option value="StandardCasal">Standard Casal</option>
+                                <option value="CasalPremium">Casal Premium</option>
                             </select>
                             <span>{errors.accommodation?.message}</span>
                         </div>
@@ -203,7 +204,7 @@ function Edit() {
                     <div className="row">
                         <div className="input">
                             <label htmlFor="cep">CEP</label>
-                            <input {...register('cep')} onChange={getCepInput} type="text" name='cep' placeholder='46400-000' />
+                            <input {...register('cep')} onKeyUp={getCepInput} type="text" name='cep' placeholder='46400-000' />
                             <span>{errors.cep?.message}</span>
                         </div>
                         <div className="input">

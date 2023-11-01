@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form'
 import schema from '../../validations/newBooking'
 import location from '../../services/axios'
@@ -7,11 +8,23 @@ import '../../styles/components/newbooking.sass'
 
 function NewBooking() {
 
+  const navigate = useNavigate();
   const [count, setCount] = useState(0)
   const [formData, setFormData] = useState([])
-  const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) })
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm({ resolver: yupResolver(schema) })
   const [inputCep, setInputCep] = useState('');
   const formRef = useRef(null)
+
+
+  const setInitialValues = (data) => {
+    console.log(data)
+    setValue('road', data.road);
+    setValue('neighborhood', data.neighborhood);
+    setValue('city', data.city);
+    setValue('state', data.state);
+    setValue('complement', data.complement);
+
+  };
 
   useEffect(() => {
     const localItem = JSON.parse(localStorage.getItem("bookingData"));
@@ -40,17 +53,14 @@ function NewBooking() {
     const cep = textCep; // Substitua pelo CEP que você deseja consultar
     try {
       const dadosCEP = await location(cep);
-      console.log('Dados do CEP:', dadosCEP);
-      let city = document.querySelector('input[name=city]');
-      city.value = dadosCEP.localidade;
-      let state = document.querySelector('select[name=state]');
-      state.value = dadosCEP.uf
-      let neighborhood = document.querySelector('input[name=neighborhood]');
-      neighborhood.value = dadosCEP.bairro
-      let road = document.querySelector('input[name=road]');
-      road.value = dadosCEP.logradouro
-      let complement = document.querySelector('input[name=complement]');
-      complement.value = dadosCEP.complemento
+      const obj = {
+        city: dadosCEP.localidade,
+        state: dadosCEP.uf,
+        neighborhood: dadosCEP.bairro,
+        road: dadosCEP.logradouro,
+        complement: dadosCEP.complemento
+      };
+      setInitialValues(obj);
 
     } catch (error) {
 
@@ -61,6 +71,7 @@ function NewBooking() {
     setFormData([...formData, { ...params, id: "#79845" + count }])
     setCount(count + 1)
     formRef.current.reset();
+    
   }
 
   return (
@@ -177,9 +188,36 @@ function NewBooking() {
             <div className="input">
               <label htmlFor="state">Estado</label>
               <select {...register('state')} onChange={getCepInput} name="state" id="state">
-                <option value="">--</option>
-                <option value="BA">BA</option>
+                <option value="">-- Selecione um estado --</option>
+                <option value="AC">Acre</option>
+                <option value="AL">Alagoas</option>
+                <option value="AP">Amapá</option>
+                <option value="AM">Amazonas</option>
+                <option value="BA">Bahia</option>
+                <option value="CE">Ceará</option>
+                <option value="DF">Distrito Federal</option>
+                <option value="ES">Espírito Santo</option>
+                <option value="GO">Goiás</option>
+                <option value="MA">Maranhão</option>
+                <option value="MT">Mato Grosso</option>
+                <option value="MS">Mato Grosso do Sul</option>
+                <option value="MG">Minas Gerais</option>
+                <option value="PA">Pará</option>
+                <option value="PB">Paraíba</option>
+                <option value="PR">Paraná</option>
+                <option value="PE">Pernambuco</option>
+                <option value="PI">Piauí</option>
+                <option value="RJ">Rio de Janeiro</option>
+                <option value="RN">Rio Grande do Norte</option>
+                <option value="RS">Rio Grande do Sul</option>
+                <option value="RO">Rondônia</option>
+                <option value="RR">Roraima</option>
+                <option value="SC">Santa Catarina</option>
+                <option value="SP">São Paulo</option>
+                <option value="SE">Sergipe</option>
+                <option value="TO">Tocantins</option>
               </select>
+
               <span>{errors.state?.message}</span>
             </div>
             <div className="input">

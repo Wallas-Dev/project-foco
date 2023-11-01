@@ -95,10 +95,8 @@ function Dashboard() {
         </div>
       </div>
       <div className='dashboard'>
-
         {dataStorage.map((item, index) => (
-
-          <div className="contentBooking">
+          <div key={item.id} className="contentBooking">
             <div className="accommodation">
               <div className='headerAccommodation'>
                 <h4 >Acomodação</h4>
@@ -155,8 +153,8 @@ function Dashboard() {
               </div>
             </div>
             <div className="acoes">
-              <img src={points} onClick={actionBooking}></img>
-              <img id={item.id} src={eye} alt="" onClick={onDetails} />
+              <img src={points} onClick={actionBooking} alt="Ações" />
+              <img id={item.id} src={eye} alt="Detalhes" onClick={onDetails} />
             </div>
             <div id={item.id} className='option'>
               <div className="edit">
@@ -168,6 +166,7 @@ function Dashboard() {
             </div>
           </div>
         ))}
+
       </div >
     </>
   )
